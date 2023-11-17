@@ -7,13 +7,14 @@ import com.bmw.servergrpc.store.BubbleTeaReply;
 import com.bmw.servergrpc.store.EntityRequest;
 import com.bmw.servergrpc.store.MultEntityRequest;
 import com.bmw.servergrpc.store.StoreGrpc;
-import com.bmw.servergrpc.store.StoreNoBubbleReply;
 import com.bmw.servergrpc.store.StoreReply;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+//TODO:HERE
 @Service
 public class StoreGrpcJavaService extends StoreGrpc.StoreImplBase {
 
@@ -78,23 +79,6 @@ public class StoreGrpcJavaService extends StoreGrpc.StoreImplBase {
                 .subscribe(responseObserver::onNext,
                         responseObserver::onError,
                         responseObserver::onCompleted);
-    }
-
-    @Override
-    public void findAllStoresWithBubbleTea(EntityRequest request, StreamObserver<StoreNoBubbleReply> responseObserver) {
-        this.repo.findAllStores()
-                .filter(store -> store.getTeas().stream().anyMatch(bubbleTea -> bubbleTea.getId() == request.getId()))
-                .flatMap(store -> this.repo.findStoreById(store.getId()))
-                .map(store -> StoreNoBubbleReply.newBuilder()
-                        .setId(store.getId())
-                        .setName(store.getName())
-                        .setAddress(store.getAddress())
-                        .setPhone(store.getPhone())
-                        .build())
-                .subscribe(responseObserver::onNext,
-                        responseObserver::onError,
-                        responseObserver::onCompleted);
-
     }
 
 

@@ -7,12 +7,12 @@ import com.bmw.servergrpc.store.BubbleTeaReply;
 import com.bmw.servergrpc.store.StoreGrpc;
 import com.bmw.servergrpc.store.StoreReply;
 import com.google.protobuf.Empty;
-import io.grpc.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+//TODO:HERE
 @Component
 public class GrpcJavaStoreApi {
 
@@ -35,27 +35,27 @@ public class GrpcJavaStoreApi {
     }
 
     public Mono<Store> findStoreById(long id) {
-
+        return Mono.empty();
     }
 
     public Flux<BubbleTea> findAllBubbleTea() {
-
+        return Flux.empty();
     }
 
     public Flux<BubbleTea> findAllBubbleTeaInStore(long storeId) {
-
+        return Flux.empty();
     }
 
     public Mono<BubbleTea> findBubbleTeaByIdAndStoreId(long id, long storeId) {
-
+        return Mono.empty();
     }
 
     public Flux<BubbleTea> findAllByStoreId(long storeId) {
-
+        return Flux.empty();
     }
 
     public Mono<BubbleTea> findBubbleTeaById(long id) {
-
+        return Mono.empty();
     }
 
     private Store mapStoreReplyToStore(StoreReply reply) {

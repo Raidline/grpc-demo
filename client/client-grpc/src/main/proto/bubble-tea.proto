@@ -25,7 +25,6 @@ service Store {
 
   // 1:n return methods
   rpc FindAllBubbleTeaInStore (EntityRequest) returns (stream BubbleTeaReply) {}
-  rpc FindAllStoresWithBubbleTea (EntityRequest) returns (stream StoreNoBubbleReply) {}
 }
 
 
@@ -60,9 +59,3 @@ message StoreReply {
   repeated BubbleTeaReply bubbleTeas = 5;
 }
 
-message StoreNoBubbleReply {
-  int64 id = 1;
-  string name = 2;
-  string address = 3;
-  string phone = 4;
-}
