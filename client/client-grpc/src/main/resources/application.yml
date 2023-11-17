@@ -1,0 +1,9 @@
+spring:
+  codec:
+    max-in-memory-size: 10MB
+  webflux:
+    base-path: /client
+  main:
+    web-application-type: reactive
+server:
+  port: 8081

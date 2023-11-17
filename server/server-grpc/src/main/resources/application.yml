@@ -1,0 +1,5 @@
+spring:
+  webflux:
+    base-path: /server
+  main:
+    web-application-type: reactive
