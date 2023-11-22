@@ -16,11 +16,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @GrpcService
 @ApplicationScoped
-public class HelloGrpcService implements StoreGrpc.AsyncService {
+public class StoreGrpcService implements StoreGrpc.AsyncService {
 
     private final StoreRepo repo;
 
-    public HelloGrpcService(StoreRepo repo) {
+    public StoreGrpcService(StoreRepo repo) {
         this.repo = repo;
     }
 
