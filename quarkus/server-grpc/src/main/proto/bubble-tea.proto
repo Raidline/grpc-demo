@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.bmw.servergrpc.store";
+option java_outer_classname = "StoreProto";
+
+import "google/protobuf/empty.proto";
+
+// stream -> for large datasets (here simulated)
+// we could use repeated instead for small datasets (like an array)
+
+// to maintain the async nature of the example, we use the keyword stream
+
+package store;
+
+service Store {
+  // no parameters stream methods
+  rpc FindAllBubbleTea (google.protobuf.Empty) returns (stream BubbleTeaReply) {}
+  rpc FindAllStores (google.protobuf.Empty) returns (stream StoreReply) {}
+
+  // 1:1 return methods
+  rpc FindBubbleTea (EntityRequest) returns (BubbleTeaReply) {}
+  rpc FindStore (EntityRequest) returns (StoreReply) {}
+  rpc FindBubbleTeaByStore (MultEntityRequest) returns (BubbleTeaReply) {}
+
+  // 1:n return methods
+  rpc FindAllBubbleTeaInStore (EntityRequest) returns (stream BubbleTeaReply) {}
+}
+
+
+//optional -> parameters that can be null
+//repeated -> array / lists
+
+// Requests
+
+message MultEntityRequest {
+  int64 id = 1;
+  int64 dependant = 2;
+}
+
+message EntityRequest {
+  int64 id = 1;
+}
+
+// Replies
+message BubbleTeaReply {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 storeId = 5;
+}
+
+message StoreReply {
+  int64 id = 1;
+  string name = 2;
+  string address = 3;
+  string phone = 4;
+  repeated BubbleTeaReply bubbleTeas = 5;
+}
+
